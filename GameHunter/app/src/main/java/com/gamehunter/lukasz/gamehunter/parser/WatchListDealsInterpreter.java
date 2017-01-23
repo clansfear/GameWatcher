@@ -3,7 +3,6 @@ package com.gamehunter.lukasz.gamehunter.parser;
 import android.support.design.widget.Snackbar;
 
 import com.gamehunter.lukasz.gamehunter.fragment.WatcherFragment;
-import com.gamehunter.lukasz.gamehunter.model.Deal;
 import com.gamehunter.lukasz.gamehunter.model.Store;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -19,7 +18,6 @@ import cz.msebera.android.httpclient.Header;
 
 public class WatchListDealsInterpreter {
     public static void searchEntry(String name)    {
-        Deal newDeal;
 
         DataReceiver.get("games?title=" + name + "&limit=1", null, new JsonHttpResponseHandler() {
 
@@ -53,7 +51,7 @@ public class WatchListDealsInterpreter {
     }
 
     public static void sendNewEntry(String name, JSONObject nextEvent) throws JSONException {
-        Deal newDeal = new Deal(name,nextEvent.getString("cheapest"),nextEvent.getString("thumb"),nextEvent.getString("cheapestDealID"));
+        Store newDeal = new Store(name,nextEvent.getString("cheapest"),nextEvent.getString("thumb"),nextEvent.getString("cheapestDealID"));
         Store.addEntryConcrete(newDeal);
     }
 }

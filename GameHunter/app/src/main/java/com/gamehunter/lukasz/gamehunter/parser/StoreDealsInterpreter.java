@@ -3,7 +3,8 @@ package com.gamehunter.lukasz.gamehunter.parser;
 import org.json.*;
 
 import com.gamehunter.lukasz.gamehunter.fragment.MainScreenFragment;
-import com.gamehunter.lukasz.gamehunter.model.Deal;
+
+import com.gamehunter.lukasz.gamehunter.model.Store;
 import com.loopj.android.http.*;
 
 import cz.msebera.android.httpclient.Header;
@@ -14,7 +15,7 @@ import cz.msebera.android.httpclient.Header;
 
 public class StoreDealsInterpreter {
 
-    private static Deal[] Steam,GOG,Amazon;
+    private static Store[] Steam,GOG,Amazon;
     private static boolean syncFlag1,syncFlag2,syncFlag3;
 
     public static void getInfo(final MainScreenFragment cb) throws JSONException  {
@@ -25,7 +26,7 @@ public class StoreDealsInterpreter {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray timeline) {
-                Steam=new Deal[5];
+                Steam=new Store[5];
                 getInfo(timeline,Steam);
                 syncFlag1=true;
                 updateMainScreenFragmentGUI(cb);
@@ -36,7 +37,7 @@ public class StoreDealsInterpreter {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray timeline) {
-                Amazon=new Deal[5];
+                Amazon=new com.gamehunter.lukasz.gamehunter.model.Store[5];
                 getInfo(timeline,Amazon);
                 syncFlag2=true;
                 updateMainScreenFragmentGUI(cb);
@@ -47,7 +48,7 @@ public class StoreDealsInterpreter {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray timeline) {
-                GOG=new Deal[5];
+                GOG=new com.gamehunter.lukasz.gamehunter.model.Store[5];
                 getInfo(timeline,GOG);
                 syncFlag3=true;
                 updateMainScreenFragmentGUI(cb);
@@ -55,7 +56,7 @@ public class StoreDealsInterpreter {
         });
     }
 
-    private static void getInfo(JSONArray timeline, Deal[] store) {
+    private static void getInfo(JSONArray timeline, Store[] store) {
 
         for(int i=0; i<5; i++) {
             JSONObject nextEvent = null;
@@ -66,8 +67,8 @@ public class StoreDealsInterpreter {
                 e.printStackTrace();
             }
             try {
-                store[i] = new Deal(nextEvent.getString("title"),nextEvent.getString("salePrice"),nextEvent.getString("normalPrice"),nextEvent.getString("dealID"));
-                System.out.println(store[i].getName());
+                store[i] = new Store(nextEvent.getString("title"),nextEvent.getString("salePrice"),nextEvent.getString("normalPrice"),nextEvent.getString("dealID"));
+                System.out.println(store[i].getTitle());
             } catch (JSONException e) {
                 e.printStackTrace();
             }

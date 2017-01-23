@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.gamehunter.lukasz.gamehunter.R;
-import com.gamehunter.lukasz.gamehunter.model.Deal;
+import com.gamehunter.lukasz.gamehunter.model.Store;
 import com.gamehunter.lukasz.gamehunter.parser.StoreDealsInterpreter;
 
 import org.json.JSONException;
@@ -41,7 +41,6 @@ public class MainScreenFragment extends Fragment implements Refreshable {
     private Runnable refresher = new Runnable() {
         @Override
         public void run() {
-            System.out.println("TEST");
             try {
                 StoreDealsInterpreter.getInfo(thisScreen);
             } catch (JSONException e) {
@@ -81,7 +80,7 @@ public class MainScreenFragment extends Fragment implements Refreshable {
         handler.postDelayed(trg, Integer.parseInt(mins)*60*1000);
     }
 
-    public void updateViews(final Deal[] steam, Deal[] amazon, Deal[] gog) {
+    public void updateViews(final Store[] steam, Store[] amazon, Store[] gog) {
 
         consumeStoreAPIPayload(steam,0);
         consumeStoreAPIPayload(amazon,1);
@@ -89,10 +88,10 @@ public class MainScreenFragment extends Fragment implements Refreshable {
 
     }
 
-    private void consumeStoreAPIPayload(final Deal[] storeName, int storeID) {
+    private void consumeStoreAPIPayload(final Store[] storeName, int storeID) {
         for(int i=0; i<5; i++)  {
 
-            titleTextViews[storeID][i].setText(storeName[i].getName());
+            titleTextViews[storeID][i].setText(storeName[i].getTitle());
             final int finalI = i;
             titleTextViews[storeID][i].setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
@@ -101,10 +100,10 @@ public class MainScreenFragment extends Fragment implements Refreshable {
                 }
             });
 
-            String storeEntry = storeName[i].getDealRating() + " " + storeName[i].getPrice() +"$";
+            String storeEntry = storeName[i].getSupplement() + " " + storeName[i].getPrice() +"$";
             SpannableString txt = new SpannableString(storeEntry);
-            txt.setSpan(new StrikethroughSpan(),0,storeName[i].getDealRating().length(),0);
-            txt.setSpan(new EasyEditSpan(),storeName[i].getDealRating().length(),storeEntry.length()-storeName[i].getDealRating().length(),0);
+            txt.setSpan(new StrikethroughSpan(),0,storeName[i].getSupplement().length(),0);
+            txt.setSpan(new EasyEditSpan(),storeName[i].getSupplement().length(),storeEntry.length()-storeName[i].getSupplement().length(),0);
 
             priceTextViews[storeID][i].setText(txt);
         }

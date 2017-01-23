@@ -89,9 +89,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 }
             });
 
-            this.desc.setText(cObj.getDescription() + "$");
-            Glide.with(fragment).load(cObj.getImageID()).into(this.imgThumb);
-            //this.imgThumb.setImageResource(cObj.getImageID());
+            this.desc.setText(cObj.getPrice() + "$");
+            Glide.with(fragment).load(cObj.getSupplement()).into(this.imgThumb);
+            //this.imgThumb.setImageResource(cObj.getSupplement());
             this.position=position;
             this.current=cObj;
         }

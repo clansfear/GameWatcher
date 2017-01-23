@@ -19,10 +19,18 @@ import java.util.List;
 
 public class Store {
 
-    private String imageID;
-    private String title="K";
-    private String description;
-    private String dealID;
+
+    private String title=""; // Title of the game/app
+    private String price; // Price on discount
+    private String supplement; // Fluff - previous price/thumbnail
+    private String dealID; // Binding to concrete offer on The Internet
+
+    public Store(String name, String price, String dealRating, String dealID) {
+        this.title = name;
+        this.price = price;
+        this.supplement = dealRating;
+        this.dealID = dealID;
+    }
 
     static List<Store> dataList = Collections.synchronizedList(new ArrayList<Store>());
 
@@ -32,12 +40,9 @@ public class Store {
     }
 
     //Creation of data based on received async API answer
-    public static synchronized void addEntryConcrete(Deal tmp) {
-        Store cnc = new Store();
-        cnc.setTitle(tmp.getName());
-        cnc.setDescription(tmp.getPrice());
-        cnc.setDealID(tmp.getDealID());
-        cnc.setImageID(tmp.getDealRating());
+    public static synchronized void addEntryConcrete(Store tmp) {
+        Store cnc = tmp;
+
         if(dataList.contains(cnc)) return;
         dataList.add(cnc);
         WatcherFragment.RefreshRecycler(WatcherFragment.watcherFragment.getContext());
@@ -83,8 +88,8 @@ public class Store {
         Save();
     }
 
-    public String getImageID() {
-        return imageID;
+    public String getSupplement() {
+        return supplement;
     }
 
     public String getDealID() {
@@ -99,20 +104,20 @@ public class Store {
         return title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getPrice() {
+        return price;
     }
 
-    public void setImageID(String imageID) {
-        this.imageID=imageID;
+    public void setSupplement(String supplement) {
+        this.supplement = supplement;
     }
 
     public void setTitle(String title)  {
         this.title=title;
     }
 
-    public void setDescription (String desc)  {
-        this.description=desc;
+    public void setPrice(String desc)  {
+        this.price =desc;
     }
 
     public static List<Store> getData()    {
