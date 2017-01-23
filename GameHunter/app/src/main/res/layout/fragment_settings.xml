@@ -1,0 +1,81 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gamehunter.lukasz.gamehunter.fragment.SettingsFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1">
+
+        <Switch
+            android:text="Auto refresh all deals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/switch1"
+            android:layout_marginEnd="88dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/textView5"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="12dp"
+            android:textSize="17sp"
+            android:checked="true"
+            android:switchMinWidth="55dp"
+            android:layout_weight="0.04"
+            android:editable="false" />
+
+        <Switch
+            android:text="Refresh only when connected to Wi-Fi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/switch2"
+            android:layout_marginEnd="68dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/textView5"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="12dp"
+            android:textSize="17sp"
+            android:checked="false"
+            android:switchMinWidth="55dp"
+            android:layout_weight="0.04" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.04"
+            android:layout_margin="12dp">
+
+            <TextView
+                android:text="Minutes to refresh:"
+                android:layout_width="125dp"
+                android:layout_height="46dp"
+                android:id="@+id/testView"
+                android:textSize="17sp"
+                android:padding="0dp"
+                android:paddingTop="0dp"
+                android:paddingStart="0dp"
+                android:paddingBottom="0dp"
+                android:textAlignment="textStart"
+                android:textColor="?android:attr/textColorPrimary"
+                android:layout_weight="26.52" />
+
+            <EditText
+                android:layout_width="134dp"
+                android:layout_height="wrap_content"
+                android:inputType="numberSigned"
+                android:ems="10"
+                android:id="@+id/editText7"
+                android:hint="Minutes"
+                android:text="5"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</FrameLayout>
